@@ -2,6 +2,7 @@ FROM ethereum/client-go
 EXPOSE 30302
 VOLUME /root/.ethereum
 ADD scripts/geth1_start.sh /
+ADD scripts/geth1_manual.sh /
 ADD files/genesis1.json /
 
 ENTRYPOINT ["/geth1_start.sh"]
