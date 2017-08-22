@@ -8,6 +8,11 @@ echo $bootnode_enode
 
 geth --datadir "$datadir" --networkid 271093 --port "30302" --maxpeers "3" --identity "geth1" init /genesis1.json && echo "Blockchain initialized successfully"
 #geth --datadir "$datadir" --networkid 271093 --bootnodes "$bootnode_enode" --port "30302" --maxpeers "3" --identity "geth1" console 2>> /root/.ethereum/geth1/console.log
+
+echo 1234 > /password.txt
+geth account new --datadir "/root/.ethereum/geth1/" --password /password.txt 
+
+
 while :
 do
 	sleep 1
