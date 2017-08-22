@@ -1,0 +1,57 @@
+version: '3'
+services:
+
+ bootnode:
+  build:
+   context: ./
+   dockerfile: Dockerfile_bootnode
+  image: ethereum_bootnode:1.0
+  ports:
+   - "30301:30301"
+  volumes:
+   - /docker-data/ethereum/:/root/ethereum/
+  networks:
+   app_net:
+    ipv4_address: 172.16.238.10
+
+ geth1:
+  build:
+   context: ./
+   dockerfile: Dockerfile_geth1
+  image: ethereum_geth1:1.0
+  ports:
+   - "30302:30302"
+  volumes:
+   - /docker-data/ethereum/:/root/.ethereum
+  networks:
+   app_net:
+    ipv4_address: 172.16.238.11
+  links:
+   - bootnode
+  depends_on:
+   - "bootnode"
+
+ geth2:
+  build:
+   context: ./
+   dockerfile: Dockerfile_geth2
+  image: ethereum_geth2:1.0
+  ports:
+   - "30303:30303"
+  volumes:
+   - /docker-data/ethereum/:/root/.ethereum
+  networks:
+   app_net:
+    ipv4_address: 172.16.238.12
+  links:
+   - bootnode
+  depends_on:
+   - "bootnode"
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24

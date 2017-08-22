@@ -1,0 +1,3 @@
+FROM ethereum/client-go
+EXPOSE 30303
+ENTRYPOINT ["geth"]

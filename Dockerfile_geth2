@@ -1,0 +1,7 @@
+FROM ethereum/client-go
+EXPOSE 30303
+VOLUME /root/.ethereum
+ADD scripts/geth2_start.sh /
+ADD files/genesis1.json /
+
+ENTRYPOINT ["/geth2_start.sh"]

@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+
+RUN ! [ -d /root/ethereum ] && mkdir -p /root/ethereum
+VOLUME /root/ethereum/
+ADD scripts/bootnode_start.sh /
+RUN apt-get update;\
+apt-get install -y software-properties-common;\
+apt-get install -y iproute2;\
+add-apt-repository -y ppa:ethereum/ethereum;\
+apt-get update;\
+apt-get install -y ethereum;\
+which bootnode;
+
+EXPOSE 30301
+CMD /bootnode_start.sh
